@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>No dayoff</th>
+      <th>Year</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @dayoffs.each do |dayoff| %>
       <tr>
         <td><%= dayoff.no_dayoff %></td>
+        <td><%= dayoff.year %></td>
         <td><%= link_to 'Show', dayoff %></td>
         <td><%= link_to 'Edit', edit_dayoff_path(dayoff) %></td>
         <td><%= link_to 'Destroy', dayoff, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,5 +25,5 @@
 </table>
 
 <br>
-  <%= link_to 'New Dayoff', new_dayoff_path %> |
+<%= link_to 'New Dayoff', new_dayoff_path %> |
 <%= link_to 'Back', root_path %>

@@ -69,6 +69,6 @@ class DayoffsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dayoff_params
-      params.require(:dayoff).permit(:no_dayoff)
+      params.require(:dayoff).permit(:no_dayoff, :year)
     end
 end
