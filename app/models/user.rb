@@ -4,4 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :day_off_requests, class_name: "DayOffRequest", :dependent => :destroy
+
 end

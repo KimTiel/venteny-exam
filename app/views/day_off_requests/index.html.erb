@@ -1,10 +1,9 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Day Off Requests</h1>
 <h3> remaining day-off <%= Dayoff.first.no_dayoff - @day_off_request_approved.count %> for this year</h3>
 <table>
   <thead>
     <tr>
+      <th>Email</th>
       <th>Reason</th>
       <th>Day-off date</th>
       <th>Status</th>
@@ -15,6 +14,7 @@
   <tbody>
     <% @day_off_requests.each do |day_off_request| %>
       <tr>
+        <td><%= day_off_request.user.email %>
         <td><%= day_off_request.reason %></td>
         <td><%= day_off_request.day_off_date %></td>
         <td>
@@ -39,7 +39,9 @@
             <td><%= link_to 'Destroy', day_off_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% else %>
             <td><%= link_to 'Show', day_off_request %></td>
-            <td><%= link_to 'Edit', edit_day_off_request_path(day_off_request) %></td>
+            <% if day_off_request.approve != true || day_off_request.denied != true %>
+              <td><%= link_to 'Edit', edit_day_off_request_path(day_off_request) %></td>
+            <% end %>
           <% end %>
       </tr>
     <% end %>
@@ -47,5 +49,7 @@
 </table>
 
 <br>
-<%= link_to 'New Day Off Request', new_day_off_request_path %> | 
+<% if current_user.hr_staff != true %>
+  <%= link_to 'New Day Off Request', new_day_off_request_path %> | 
+<% end %>
 <%= link_to 'Back', root_path %>

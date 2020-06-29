@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   
   root to: 'pages#home'
   devise_for :users
-
+  resources :hr_staff, :controller => 'hr_staffs'
+  resources :employee, :controller => 'employees'
   resources :dayoffs
-  resources :users_staff, :controller => 'users'
   resources :day_off_requests do 
     member do 
       post :approve

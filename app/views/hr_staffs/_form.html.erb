@@ -1,10 +1,10 @@
-<%= form_with(model: @user, local: true, url: users_staff_index_path, method: (@user.persisted? ? "put" : "post")) do |form| %>
-  <% if user.errors.any? %>
+<%= form_with(model: hr_staff, local: true, url: (@hr_staff.persisted? ? hr_staff_path : hr_staff_index_path ), method: (@hr_staff.persisted? ? "patch" : "post")) do |form| %>
+  <% if hr_staff.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(hr_staff.errors.count, "error") %> prohibited this hr_staff from being saved:</h2>
 
       <ul>
-        <% user.errors.full_messages.each do |message| %>
+        <% hr_staff.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -28,11 +28,6 @@
     <%= form.label :password_confirmation %><br />
     <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-  
-  <% if params[:role] == "hr_staff" %>
-    <%= form.label :hr_staff %><br />
-    <%= form.check_box :hr_staff, checked: true%>
-  <% end %>
 
   <div class="actions">
     <%= form.submit %>

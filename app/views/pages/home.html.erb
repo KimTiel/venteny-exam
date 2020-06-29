@@ -4,15 +4,15 @@
   <% if current_user.admin == true %>
     <%= link_to 'No of Day-Off', dayoffs_path %> 
     </br>
-    <%= link_to 'HR Staff', users_staff_index_path(:role => "hr_staff") %>
+    <%= link_to 'HR Staff', hr_staff_index_path %>
     </br>
-    <%= link_to 'Employee', users_staff_index_path(:role => "employee") %>
+    <%= link_to 'Employee', employee_index_path %>
     </br>
     <%= link_to 'Day-Off Request', day_off_requests_path %>
   <% elsif current_user.hr_staff == true %>
     <%= link_to 'No of Day-Off', dayoffs_path %>
     </br>
-    <%= link_to 'Employee', users_staff_index_path(:role => "employee") %>
+    <%= link_to 'Employee', employee_index_path %>
     </br>
     <%= link_to 'Day-Off Request', day_off_requests_path %>
   <% else %>
