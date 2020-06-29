@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reason: MyString
+  day_off_date: 2020-06-29
+
+two:
+  reason: MyString
+  day_off_date: 2020-06-29

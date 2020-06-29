@@ -1,0 +1,33 @@
+<h1>Pages#home</h1>
+
+<% if current_user %>
+  <% if current_user.admin == true %>
+    <%= link_to 'No of Day-Off', dayoffs_path %> 
+    </br>
+    <%= link_to 'HR Staff', users_staff_index_path(:role => "hr_staff") %>
+    </br>
+    <%= link_to 'Employee', users_staff_index_path(:role => "employee") %>
+    </br>
+    <%= link_to 'Day-Off Request', day_off_requests_path %>
+  <% elsif current_user.hr_staff == true %>
+    <%= link_to 'No of Day-Off', dayoffs_path %>
+    </br>
+    <%= link_to 'Employee', users_staff_index_path(:role => "employee") %>
+    </br>
+    <%= link_to 'Day-Off Request', day_off_requests_path %>
+  <% else %>
+    <%= link_to 'Day-Off Request', day_off_requests_path %>
+  <% end %>
+  </br></br></br>
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+  
+<% else %>
+  <%= link_to 'Sign up', new_user_registration_path %> |
+  <%= link_to 'Sign in', new_user_session_path %> 
+<% end %>
+
+
+
+
+
+

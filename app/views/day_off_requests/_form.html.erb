@@ -1,0 +1,31 @@
+<%= form_with(model: day_off_request, local: true) do |form| %>
+  <% if day_off_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(day_off_request.errors.count, "error") %> prohibited this day_off_request from being saved:</h2>
+
+      <ul>
+        <% day_off_request.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :reason %>
+    <%= form.text_field :reason %>
+  </div>
+
+  <div class="field">
+    <%= form.label :day_off_date %>
+    <%= form.date_select :day_off_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.hidden_field :user_id, :value => current_user.id %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<%= form_with(model: dayoff, local: true) do |form| %>
+  <% if dayoff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dayoff.errors.count, "error") %> prohibited this dayoff from being saved:</h2>
+
+      <ul>
+        <% dayoff.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :no_dayoff %>
+    <%= form.number_field :no_dayoff, min: "0" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

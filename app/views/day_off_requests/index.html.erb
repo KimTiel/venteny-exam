@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Day Off Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reason</th>
+      <th>Day off date</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @day_off_requests.each do |day_off_request| %>
+      <tr>
+        <td><%= day_off_request.reason %></td>
+        <td><%= day_off_request.day_off_date %></td>
+        <td>
+          <% if day_off_request.approve == false && day_off_request.denied == false %>
+            Pending
+          <% elsif day_off_request.approve == false && day_off_request.denied == true %>
+            Approved
+          <% elsif day_off_request.approve == true && day_off_request.denied == false %>
+            Denied
+          <% end %>
+        </td>
+           <% if current_user.admin == true || current_user.hr_staff == true %>
+            <% if day_off_request.approve == false && day_off_request.denied == false %>
+              <td><%= link_to 'Approved', approve_day_off_request_path(day_off_request) %></td>
+              <td><%= link_to 'Denied', denied_day_off_request_path(day_off_request) %></td>
+            <% elsif day_off_request.approve == false && day_off_request.denied == true %>
+              <td><%= link_to 'Approved', approve_day_off_request_path(day_off_request) %></td>
+            <% elsif day_off_request.approve == true && day_off_request.denied == false %>
+              <td><%= link_to 'Denied', denied_day_off_request_path(day_off_request) %></td>
+            <% end %>
+          <% end %>
+        <td><%= link_to 'Show', day_off_request %></td>
+        <td><%= link_to 'Edit', edit_day_off_request_path(day_off_request) %></td>
+        <td><%= link_to 'Destroy', day_off_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if Dayoff.first.no_dayoff >= @day_off_request_approved.count %>
+  <%= link_to 'New Day Off Request', new_day_off_request_path %> | 
+<% end %>
+<%= link_to 'Back', root_path %>

@@ -1,0 +1,2 @@
+class Dayoff < ApplicationRecord
+end
