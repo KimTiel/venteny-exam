@@ -71,11 +71,18 @@ class DayOffRequestsController < ApplicationController
 
   def approve
     @day_off_request.update(approve: true, denied: false)
-    format.html { redirect_to day_off_requests_url, notice: 'Day off request was successfully approved.' }
+    respond_to do |format|
+      format.html { redirect_to day_off_requests_url, notice: 'Day off request was successfully approved.' }
+      format.json { head :no_content }
+    end
   end
 
   def denied
     @day_off_request.update(approve: false, denied: true)
+    respond_to do |format|
+      format.html { redirect_to day_off_requests_url, notice: 'Day off request was successfully approved.' }
+      format.json { head :no_content }
+    end
   end
 
 

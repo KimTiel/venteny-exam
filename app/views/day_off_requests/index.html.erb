@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Day Off Requests</h1>
-
+<h3> remaining dayoff <%= Dayoff.first.no_dayoff - @day_off_request_approved.count %><h3>
 <table>
   <thead>
     <tr>
@@ -21,31 +21,33 @@
           <% if day_off_request.approve == false && day_off_request.denied == false %>
             Pending
           <% elsif day_off_request.approve == false && day_off_request.denied == true %>
-            Approved
-          <% elsif day_off_request.approve == true && day_off_request.denied == false %>
             Denied
+          <% elsif day_off_request.approve == true && day_off_request.denied == false %>
+            Approved
           <% end %>
         </td>
            <% if current_user.admin == true || current_user.hr_staff == true %>
             <% if day_off_request.approve == false && day_off_request.denied == false %>
-              <td><%= link_to 'Approved', approve_day_off_request_path(day_off_request) %></td>
-              <td><%= link_to 'Denied', denied_day_off_request_path(day_off_request) %></td>
+              <td><%= link_to 'Approved', approve_day_off_request_path(day_off_request), method: :post %></td>
+              <td><%= link_to 'Denied', denied_day_off_request_path(day_off_request), method: :post %></td>
+                        
             <% elsif day_off_request.approve == false && day_off_request.denied == true %>
-              <td><%= link_to 'Approved', approve_day_off_request_path(day_off_request) %></td>
+              <td><%= link_to 'Approved', approve_day_off_request_path(day_off_request), method: :post  %></td>
             <% elsif day_off_request.approve == true && day_off_request.denied == false %>
-              <td><%= link_to 'Denied', denied_day_off_request_path(day_off_request) %></td>
+              <td><%= link_to 'Denied', denied_day_off_request_path(day_off_request), method: :post  %></td>
             <% end %>
+            <td><%= link_to 'Show', day_off_request %></td>
+            <td><%= link_to 'Edit', edit_day_off_request_path(day_off_request) %></td>
+            <td><%= link_to 'Destroy', day_off_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
-        <td><%= link_to 'Show', day_off_request %></td>
-        <td><%= link_to 'Edit', edit_day_off_request_path(day_off_request) %></td>
-        <td><%= link_to 'Destroy', day_off_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<% if Dayoff.first.no_dayoff >= @day_off_request_approved.count %>
+<%#= raise "#{Dayoff.first.no_dayoff} ----- #{@day_off_request_approved.count}"%>
+<% if Dayoff.first.no_dayoff != @day_off_request_approved.count %>
   <%= link_to 'New Day Off Request', new_day_off_request_path %> | 
 <% end %>
 <%= link_to 'Back', root_path %>

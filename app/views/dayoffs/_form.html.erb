@@ -16,6 +16,12 @@
     <%= form.number_field :no_dayoff, min: "0" %>
   </div>
 
+  <div class="field">
+    <%= form.label :year %>
+    <%= select_year Date.today, :start_year => Time.now.year, :end_year => Time.now.year - 95, :field_name => :year, :prefix => :day_off_request  %>
+
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
