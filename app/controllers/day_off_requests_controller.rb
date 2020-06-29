@@ -99,7 +99,7 @@ class DayOffRequestsController < ApplicationController
     end
 
     def count_day_off_approved
-      @day_off_request_approved = DayOffRequest.where(:user_id => current_user.id, :approve => true)
+      @day_off_request_approved = DayOffRequest.where("user_id = ? and day_off_date > ? AND day_off_date < ? and approve = ?", current_user, (Date::new(Date.today.year,01,01).beginning_of_year), (Date::new(Date.today.year,01,01).end_of_year), true)
     end
     
 end
